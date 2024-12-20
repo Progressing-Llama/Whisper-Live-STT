@@ -7,7 +7,6 @@ import wave
 
 import librosa
 import numpy as np
-import pyaudio
 import whisper
 
 from AudioInput import AudioRecorder
@@ -38,11 +37,13 @@ class LiveSTT:
 
         self._ticker = time.time()
 
-        self.model = whisper.load_model(whisper_model)
+        self.model = whisper.load_model(whisper_model).to("cuda:0")
 
         self.predicted_text = ""
 
         self._processing_thread = None
+
+        self.confirmed_text = ""
 
     def capture(self):
         data = self.recorder.record()
@@ -83,7 +84,7 @@ class LiveSTT:
 
     def calculate_recommended_settings(self, live_time=2, safety_factor=2, apply=True, calib_file="calib_1.wav"):
         print("Running calibration")
-        live_factor = stt.run_calibration(calib_file)
+        live_factor = self.run_calibration(calib_file)
 
         print(f"The processing time is {live_factor * 1000}ms per second of audio.")
 
@@ -99,8 +100,8 @@ class LiveSTT:
             self.capture_time = math.floor(capture_time)
             self.processing_time = processing_time
 
-            print(f"Capture time is set to {int(stt.capture_time)}s.")
-            print(f"Process time is set to {stt.processing_time}s.")
+            print(f"Capture time is set to {int(self.capture_time)}s.")
+            print(f"Process time is set to {self.processing_time}s.")
 
         return processing_time, capture_time, live_factor
 
@@ -134,27 +135,27 @@ class LiveSTT:
         if len(self.predicted_text) == 0:
             self.predicted_text = result
         else:
-            self.predicted_text = combine_overlapping_text(self.predicted_text, result)
+            predicted_text, confirmed_text = combine_overlapping_text(self.predicted_text, result)
 
-            if self.predicted_text is None:
+            self.confirmed_text = confirmed_text
+
+            if predicted_text is None:
                 self.buffer.append({"text": "silence"})
                 self.predicted_text += "[Silence]"
                 self.predicted_text += result
 
                 print("None output, possibly slight pause")
+            else:
+                self.predicted_text = predicted_text
 
         with open("out.json", "w") as f:
             f.write(json.dumps(self.buffer, indent=4))
 
-        return self.predicted_text
+        return self.predicted_text, self.confirmed_text
 
     def process_thread(self, process_data):
-        try:
-            self.transcribe(process_data)
-            self.build_transcript()
-
-        except Exception as e:
-            print(e)
+        self.transcribe(process_data)
+        self.build_transcript()
 
         self._processing_thread = None
 

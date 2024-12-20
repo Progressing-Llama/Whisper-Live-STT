@@ -1,6 +1,3 @@
-import json
-
-
 def find_common_sequences(str1, str2, min_length=2):
     # Convert strings to lists of words
     words1 = str1.lower().split()
@@ -60,6 +57,7 @@ def combine_overlapping_text(predicted_text: str, new_text):
     if len(common_text) == 0:
         return None
 
+
     common_text, start_index = common_text_selector(new_text, common_text)
 
     start_replace_index = str(predicted_text.lower()).find(common_text.lower())
@@ -71,4 +69,4 @@ def combine_overlapping_text(predicted_text: str, new_text):
     predicted_text += new_text
 
     # Join the words into a single sentence
-    return predicted_text
+    return predicted_text, new_text[:start_index]

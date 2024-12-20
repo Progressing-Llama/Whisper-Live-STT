@@ -52,3 +52,8 @@ stt.reset_ticker()
 while True:
     stt.process()
 ```
+## FAQ
+
+#### FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+This error occurs when ffmpeg is not found in the environmental path or found in working directory. Check installation guide.

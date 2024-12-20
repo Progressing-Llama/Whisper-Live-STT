@@ -36,7 +36,7 @@ scoop install ffmpeg
 
 Alternatively, you can copy the ffmpeg binary file to the working directory of your project.
 
-## Demo
+## Usage/Examples
 
 ```python
 from live_stt import LiveSTT

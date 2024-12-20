@@ -55,8 +55,7 @@ def combine_overlapping_text(predicted_text: str, new_text):
     common_text = find_common_sequences(predicted_text, new_text)
 
     if len(common_text) == 0:
-        return None
-
+        return None, None
 
     common_text, start_index = common_text_selector(new_text, common_text)
 
@@ -69,4 +68,4 @@ def combine_overlapping_text(predicted_text: str, new_text):
     predicted_text += new_text
 
     # Join the words into a single sentence
-    return predicted_text, new_text[:start_index]
+    return predicted_text, predicted_text[:start_replace_index]

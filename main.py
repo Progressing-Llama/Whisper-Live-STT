@@ -1,3 +1,6 @@
+import os
+import time
+
 from live_stt import LiveSTT
 
 print("Initializing...")

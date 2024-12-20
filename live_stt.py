@@ -122,7 +122,7 @@ class LiveSTT:
 
         mel = whisper.log_mel_spectrogram(audio, n_mels=model.dims.n_mels).to(model.device)
 
-        options = whisper.DecodingOptions(language="en")
+        options = whisper.DecodingOptions(language="en", suppress_tokens="")
         result = whisper.decode(self.model, mel, options)
 
         self.buffer.append({"text": result.text, "weight": math.exp(result.avg_logprob)})

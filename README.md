@@ -7,6 +7,11 @@ Feel free to check the detailed article below on the explanations behind the sli
 **How to make Whisper STT live transcription.**
 [Part 1](https://medium.com/p/79c628984fc6)
 [Part 2](https://medium.com/@pcb.it18/how-to-make-whisper-stt-live-transcription-part-2-5daa1dfa3be8)
+## Future Updates
+- [ ] Create an installable package
+- [ ] Create examples to create super class that can leverage custom models or custom audio streams.
+- [ ] Fix the sentence builder algorithm, it deletes text when single words are cycled through.
+- [ ] Add an iteractive gui
 ## Installation
 
 ```bash
@@ -51,6 +56,7 @@ stt.reset_ticker()
 
 while True:
     stt.process()
+
     print(stt.confirmed_text)
 ```
 ## FAQ

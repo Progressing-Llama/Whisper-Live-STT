@@ -51,6 +51,7 @@ stt.reset_ticker()
 
 while True:
     stt.process()
+    print(stt.confirmed_text)
 ```
 ## FAQ
 

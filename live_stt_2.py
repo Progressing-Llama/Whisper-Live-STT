@@ -190,12 +190,6 @@ class LiveSTT:
 
         return result.text
 
-    def _resample_to_16k(self, audio_data, original_rate):
-        # Resample from 44100 Hz to 16000 Hz
-        duration = len(audio_data) / original_rate
-        new_length = int(duration * 16000)
-        return resample(audio_data, new_length)
-
     def detect_speech_in_frames(self, audio_frames):
         """
         Detects speech in 44.1kHz audio frames using WebRTC VAD.

@@ -6,7 +6,8 @@ Feel free to check the detailed article below on the explanations behind the sli
 
 **How to make Whisper STT live transcription.**
 [Part 1](https://medium.com/p/79c628984fc6)
-[Part 2](https://medium.com/@pcb.it18/how-to-make-whisper-stt-live-transcription-part-2-5daa1dfa3be8)
+[Part 2](https://medium.com/p/5daa1dfa3be8)
+[Part 3](https://medium.com/p/10395d124c73)
 ## Future Updates
 - [ ] Create an installable package
 - [ ] Create examples to create super class that can leverage custom models or custom audio streams.

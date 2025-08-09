@@ -1,0 +1,14 @@
+langchain_core==0.3.74
+langchain_openai==0.3.29
+librosa==0.10.2.post1
+numpy==2.3.2
+openai_whisper==20240930
+PyAudio==0.2.14
+PySide6==6.8.1
+PySide6==6.9.1
+PySide6_Addons==6.8.1
+PySide6_Essentials==6.8.1
+scipy==1.16.1
+webrtcvad==2.0.10
+webrtcvad_wheels==2.0.14
+whisper_openai==1.0.0

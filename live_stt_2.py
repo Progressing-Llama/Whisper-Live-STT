@@ -99,9 +99,6 @@ class LiveSTT:
 
         self.vad_model = webrtcvad.Vad(2)
 
-        with open("out.json", "w") as f:
-            f.write(json.dumps([], indent=4))
-
     def capture(self):
         while self.running:
             data = self.recorder.record()
